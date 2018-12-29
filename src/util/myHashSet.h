@@ -31,7 +31,7 @@ template <class Data>
 class HashSet
 {
 public:
-   HashSet(size_t b = 0) : _numBuckets(0), _buckets(0) { if (b != 0) init(b); }
+   HashSet(size_t b = 0) : _numBuckets(0), _buckets(nullptr) { if (b != 0) init(b); }
    ~HashSet() { reset(); }
 
    // TODO: implement the HashSet<Data>::iterator
@@ -57,7 +57,7 @@ public:
    void init(size_t b) { _numBuckets = b; _buckets = new vector<Data>[b]; }
    void reset() {
       _numBuckets = 0;
-      if (_buckets) { delete [] _buckets; _buckets = 0; }
+      if (_buckets) { delete [] _buckets; _buckets = nullptr; }
    }
    void clear() {
       for (size_t i = 0; i < _numBuckets; ++i) _buckets[i].clear();
@@ -95,15 +95,13 @@ public:
 
    // return true if inserted successfully (i.e. d is not in the hash)
    // return false is d is already in the hash ==> will not insert
-   bool insert(const Data& d) { return true; }
+   bool insert(const Data& d);
 
    // return true if removed successfully (i.e. d is in the hash)
    // return fasle otherwise (i.e. nothing is removed)
    bool remove(const Data& d) { return false; }
 
    // =============helper functions============================
-   // search only, doesn't modify the data.
-   bool find( const Data& d ) const;
 
 private:
    // Do not add any extra data member

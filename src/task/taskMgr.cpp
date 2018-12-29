@@ -85,13 +85,14 @@ TaskMgr::remove(const string& s)
 void
 TaskMgr::add(size_t nMachines)
 {
-   // TODO...
+   // TODO... done? 1230 0144
   for( size_t i = 0; i < nMachines; ){
     const auto tmp = TaskNode();
-    if( !_taskHash.find( tmp ) )
-      continue;
-    ++i;
-    _taskHash.insert( tmp );
+    if( ! _taskHash.find( tmp ) ){
+      ++i;
+      _taskHash.insert( tmp );
+      _taskHeap.insert( tmp );
+    }
   }
 }
 
