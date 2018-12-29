@@ -101,6 +101,10 @@ public:
    // return fasle otherwise (i.e. nothing is removed)
    bool remove(const Data& d) { return false; }
 
+   // =============helper functions============================
+   // search only, doesn't modify the data.
+   bool find( const Data& d ) const;
+
 private:
    // Do not add any extra data member
    size_t            _numBuckets;

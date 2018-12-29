@@ -86,15 +86,22 @@ void
 TaskMgr::add(size_t nMachines)
 {
    // TODO...
+  for( size_t i = 0; i < nMachines; ){
+    const auto tmp = TaskNode();
+    if( !_taskHash.find( tmp ) )
+      continue;
+    ++i;
+    _taskHash.insert( tmp );
+  }
 }
 
 // return true if TaskNode is successfully inserted
 // return false if equivalent node has already existed
-bool
+  bool
 TaskMgr::add(const string& s, size_t l)
 {
-   // TODO...
-   return false;
+  // TODO...
+  return false;
 }
 
 // Assign the min task node with 'l' extra load.
@@ -103,25 +110,25 @@ TaskMgr::add(const string& s, size_t l)
 // The corresponding node in the hash should be updated, too.
 // return false if taskMgr is empty
 // otherwise, return true.
-bool
+  bool
 TaskMgr::assign(size_t l)
 {
-   // TODO...
-   return true;
+  // TODO...
+  return true;
 }
 
 // WARNING: DO NOT CHANGE THESE TWO FUNCTIONS!!
 void
 TaskMgr::printAllHash() const 
 {
-   HashSet<TaskNode>::iterator hi = _taskHash.begin();
-   for (; hi != _taskHash.end(); ++hi)
-      cout << *hi << endl;
+  HashSet<TaskNode>::iterator hi = _taskHash.begin();
+  for (; hi != _taskHash.end(); ++hi)
+    cout << *hi << endl;
 }
 
 void
 TaskMgr::printAllHeap() const
 {
-   for (size_t i = 0, n = size(); i < n; ++i)
-      cout << _taskHeap[i] << endl;
+  for (size_t i = 0, n = size(); i < n; ++i)
+    cout << _taskHeap[i] << endl;
 }
