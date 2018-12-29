@@ -74,14 +74,14 @@ public:
    // Pass the end
    iterator end() const { return iterator(); }
    // return true if no valid data
-   bool empty() const { return true; }
+   bool empty() const ;
    // number of valid data
-   size_t size() const { size_t s = 0; return s; }
+   size_t size() const ;
 
    // check if d is in the hash...
    // if yes, return true;
    // else return false;
-   bool check(const Data& d) const { return false; }
+   bool check(const Data& d) const ;
 
    // query if d is in the hash...
    // if yes, replace d with the data in the hash and return true;
