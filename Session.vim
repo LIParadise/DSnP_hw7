@@ -39,19 +39,20 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
 endif
 set shortmess=aoO
 badd +29 src/util/myMinHeap.h
-badd +109 src/util/myHashSet.h
+badd +95 src/util/myHashSet.h
 badd +26 src/task/taskMgr.cpp
 badd +22 src/task/taskMgr.h
 badd +1 src/task/taskCmd.h
 badd +1 src/util/myMinHeap.cpp
 badd +15 /mnt/data/Document/DSnP/DSnP_hw6/src/cir/cirGate.cpp
 badd +3 src/Makefile.in
-badd +0 ./src/task/taskCmd.cpp
+badd +1 ./src/task/taskCmd.cpp
+badd +0 src/util/myHashSet.cpp
 argglobal
 silent! argdel *
 argadd src/util/myMinHeap.h
 set stal=2
-edit src/util/myMinHeap.cpp
+edit src/util/myMinHeap.h
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
@@ -175,15 +176,15 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 6 - ((5 * winheight(0) + 19) / 39)
+let s:l = 39 - ((29 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-6
-normal! 033|
+39
+normal! 0
 wincmd w
 argglobal
-edit src/util/myMinHeap.h
+edit src/util/myMinHeap.cpp
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
@@ -295,11 +296,11 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 35 - ((23 * winheight(0) + 19) / 39)
+let s:l = 3 - ((2 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-35
+3
 normal! 0
 wincmd w
 exe 'vert 1resize ' . ((&columns * 73 + 73) / 146)
@@ -428,15 +429,15 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 90 - ((0 * winheight(0) + 19) / 39)
+let s:l = 113 - ((34 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-90
+113
 normal! 0
 wincmd w
 argglobal
-edit src/util/myHashSet.h
+edit src/util/myHashSet.cpp
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
@@ -449,7 +450,7 @@ setlocal buflisted
 setlocal buftype=
 setlocal cindent
 setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
-setlocal cinoptions=
+setlocal cinoptions=j1,(0,ws,Ws,N-s
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
 setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
@@ -548,12 +549,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 39 - ((14 * winheight(0) + 19) / 39)
+let s:l = 83 - ((38 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-39
-normal! 013|
+83
+normal! 0
 wincmd w
 exe 'vert 1resize ' . ((&columns * 73 + 73) / 146)
 exe 'vert 2resize ' . ((&columns * 72 + 73) / 146)
@@ -688,12 +689,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 106 - ((3 * winheight(0) + 9) / 19)
+let s:l = 33 - ((0 * winheight(0) + 9) / 19)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-106
-normal! 036|
+33
+normal! 0
 wincmd w
 argglobal
 edit src/task/taskMgr.h
@@ -808,12 +809,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 55 - ((2 * winheight(0) + 9) / 19)
+let s:l = 20 - ((16 * winheight(0) + 9) / 19)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-55
-normal! 012|
+20
+normal! 0
 wincmd w
 argglobal
 edit src/task/taskMgr.cpp
@@ -928,12 +929,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 94 - ((31 * winheight(0) + 19) / 39)
+let s:l = 133 - ((34 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-94
-normal! 028|
+133
+normal! 0
 wincmd w
 exe '1resize ' . ((&lines * 19 + 21) / 42)
 exe 'vert 1resize ' . ((&columns * 73 + 73) / 146)
@@ -1064,7 +1065,7 @@ exe s:l
 normal! zt
 235
 normal! 020|
-tabnext 3
+tabnext 2
 set stal=1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
