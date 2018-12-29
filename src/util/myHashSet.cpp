@@ -55,10 +55,29 @@ HashSet<T>::query( T& other ) const
 {
   auto* bucketPtr = _buckets + bucketNum(other) ;
   for_each ( bucketPtr->begin(), bucketPtr->end(),
-      [] ( T& data_stored_in_hash )
-      {
-        if( data_stored_in_hash == other )
-          other = data_stored_in_hash;
-        // FIXME
-      }
+            [&other] ( const T& data_stored_in_hash )
+            {
+              if( data_stored_in_hash == other ){
+                other = data_stored_in_hash;
+                return true;
+              }
+            } );
+  return false;
+}
+
+template <typename T>
+bool
+HashSet<T>::update( const T& other )
+{
+  auto* bucketPtr = _buckets + bucketNum(other) ;
+  for_each ( bucketPtr->begin(), bucketPtr->end(),
+            [&other] ( T& data_stored_in_hash )
+            {
+              if( data_stored_in_hash == other ){
+                data_stored_in_hash = other;
+                return true;
+              }
+            } );
+  bucketPtr->push_back( other);
+  return false;
 }
