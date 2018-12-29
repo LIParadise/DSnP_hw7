@@ -1,4 +1,5 @@
 #include "myHashSet.h"
+#include <algorithm>
 
 using namespace std;
 
@@ -42,9 +43,22 @@ HashSet<T>::empty() const
 
 template< typename T>
 bool
-HashSet<T>::check( const T& data ) const
+HashSet<T>::check( const T& other ) const
 {
-  auto* bucketPtr = _buckets + bucketNum(data) ;
-  return ( bucketPtr->find( data ) == bucketPtr -> end()  );
+  auto* bucketPtr = _buckets + bucketNum(other) ;
+  return ( bucketPtr->find( other ) == bucketPtr -> end()  );
 }
 
+template <typename T>
+bool
+HashSet<T>::query( T& other ) const
+{
+  auto* bucketPtr = _buckets + bucketNum(other) ;
+  for_each ( bucketPtr->begin(), bucketPtr->end(),
+      [] ( T& data_stored_in_hash )
+      {
+        if( data_stored_in_hash == other )
+          other = data_stored_in_hash;
+        // FIXME
+      }
+}
