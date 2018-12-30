@@ -41,6 +41,9 @@ private:
 
    // helper functions.
 
+   // fix the heap. would call heapFixUp or heapFixDown;
+   void heapFix    ( size_t );
+
    // fixing ill-formed heap caused by deletion.
    // shall not be used to fix update of node.
    void heapFixDown( size_t );
@@ -72,7 +75,7 @@ MinHeap<T>::insert( const T& other )
     parent = (s-1)/2;
     if( _data[parent] < other )
       break;
-    _data[s] = move( _data[parent] );
+    _data[s] = _data[parent] ;
     s = parent;
   }
   _data[s] = other;
@@ -84,7 +87,7 @@ MinHeap<T>::delMin()
 {
   swap( _data[0], _data[_data.size()-1] );
   _data.erase(_data.back());
-  heapFixDown();
+  heapFix();
 }
 
 template <typename T>
@@ -93,24 +96,19 @@ MinHeap<T>::delData( size_t s )
 {
   swap( _data[s], _data[_data.size()-1] );
   _data.pop_back();
-  heapFixDown( s );
+  heapFix( s );
 }
 
 template <typename T>
 void
 MinHeap<T>::heapFixDown( size_t idx)
 {
-  // idx marks the position which may not obbey heap rule.
-  //
-  // its data is the old _data.back(), thus must not be smaller
-  // than it's parent; i.e. it's parent is smaller than all its
-  // descendants.
-  // 
   // just fix downwards.
+  // other part of the heap is still in valid state,
+  // thus just compare it to its descendants.
   if( !( idx<_data.size()) )
     return;
 
-  T bak = _data[idx];
   while (idx < _data.size())
   {
     size_t tmp     = idx;
@@ -124,10 +122,9 @@ MinHeap<T>::heapFixDown( size_t idx)
         tmp = childR;
     if( tmp == idx )
       break;
-    _data[ idx ] = _data[ tmp ] ;
+    swap( _data[idx], _data[tmp] );
     idx = tmp;
   }
-  _data[idx] = move( bak );
 }
 
 template <typename T>
@@ -140,16 +137,30 @@ MinHeap<T>::heapFixUp( size_t idx )
   if( idx == 0 )
     return;
 
-  T bak = _data[idx];
   while( idx != 0 )
   {
     size_t parent = (idx-1)/2;
-    if( bak < _data[parent] )
+    if( _data[idx] < _data[parent] )
     {
-      _data[idx] = _data[parent];
+      swap( _data[idx], _data[parent] );
       idx = parent;
     }
   }
-  _data[idx] = move( bak);
+}
+
+template <typename T>
+void
+MinHeap<T>::heapFix( size_t idx )
+{
+  size_t parent = (idx-1)/2;
+
+  if( idx != 0 )
+    if( _data[idx] < _data[parent] )
+    {
+      heapFixUp( idx );
+      return;
+    }
+  heapFixDown( idx );
+  return ;
 }
 #endif // MY_MIN_HEAP_H
