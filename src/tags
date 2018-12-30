@@ -115,7 +115,7 @@ query	task/taskMgr.h	/^   bool query(TaskNode& n) { return _taskHash.query(n); }
 query	util/myHashSet.cpp	/^HashSet<T>::query( T& other ) const$/;"	f	class:HashSet
 remove	task/taskMgr.cpp	/^TaskMgr::remove(const string& s)$/;"	f	class:TaskMgr
 remove	task/taskMgr.cpp	/^TaskMgr::remove(size_t nMachines)$/;"	f	class:TaskMgr
-remove	util/myHashSet.h	/^   bool remove(const Data& d) { return false; }$/;"	f	class:HashSet
+remove	util/myHashSet.cpp	/^HashSet<T>::remove( const T& other ) $/;"	f	class:HashSet
 removeData	util/util.h	/^void removeData(T& l, const D& d)$/;"	f
 report	util/myUsage.h	/^   void report(bool repTime, bool repMem) {$/;"	f	class:MyUsage
 reset	util/myHashSet.h	/^   void reset() {$/;"	f	class:HashSet

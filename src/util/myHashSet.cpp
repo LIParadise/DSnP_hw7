@@ -81,3 +81,19 @@ HashSet<T>::update( const T& other )
   bucketPtr->push_back( other);
   return false;
 }
+
+template <typename T>
+bool
+HashSet<T>::remove( const T& other ) 
+{
+  auto* bucketPtr = _buckets + bucketNum(other) ;
+  for( auto it = bucketPtr->begin(); it != bucketPtr->end(); ++it )
+  {
+    if( *it == other )
+    {
+      bucketPtr->erase( it );
+      return true;
+    }
+  }
+  return false;
+}
