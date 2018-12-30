@@ -48,10 +48,15 @@ public:
       friend class HashSet<Data>;
 
    public:
+      iterator( const typename vector<Data>::iterator& it,
+          size_t s = 0):
+        _itor( it), _bucketIdx(s) {}
       const Data& operator * () const { return Data(); }
       iterator& operator ++ () { return (*this); }
       bool operator != (const iterator& i) const { return true; }
    private:
+      typename vector<Data>::iterator _itor;
+      size_t                          _bucketIdx;
    };
 
    void init(size_t b) { _numBuckets = b; _buckets = new vector<Data>[b]; }
@@ -70,9 +75,9 @@ public:
    // TODO: implement these functions
    //
    // Point to the first valid data
-   iterator begin() const { return iterator(); }
+   iterator begin() const ;
    // Pass the end
-   iterator end() const { return iterator(); }
+   iterator end() const ;
    // return true if no valid data
    bool empty() const ;
    // number of valid data

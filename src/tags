@@ -34,11 +34,13 @@ TaskNode	task/taskMgr.h	/^class TaskNode$/;"	c
 TaskQueryCmd	task/taskCmd.h	/^CmdClass(TaskQueryCmd);$/;"	v
 TaskRemoveCmd	task/taskCmd.h	/^CmdClass(TaskRemoveCmd);$/;"	v
 UTIL_H	util/util.h	9;"	d
+_bucketIdx	util/myHashSet.h	/^      size_t                          _bucketIdx;$/;"	m	class:HashSet::iterator
 _buckets	util/myHashSet.h	/^   vector<Data>*     _buckets;$/;"	m	class:HashSet
 _currentMem	util/myUsage.h	/^   double     _currentMem;$/;"	m	class:MyUsage
 _currentTick	util/myUsage.h	/^   double     _currentTick;$/;"	m	class:MyUsage
 _data	util/myMinHeap.h	/^   vector<Data>   _data;$/;"	m	class:MinHeap
 _initMem	util/myUsage.h	/^   double     _initMem;$/;"	m	class:MyUsage
+_itor	util/myHashSet.h	/^      typename vector<Data>::iterator _itor;$/;"	m	class:HashSet::iterator
 _load	task/taskMgr.h	/^   size_t   _load;$/;"	m	class:TaskNode
 _name	task/taskMgr.h	/^   string   _name;$/;"	m	class:TaskNode
 _numBuckets	util/myHashSet.h	/^   size_t            _numBuckets;$/;"	m	class:HashSet
@@ -49,7 +51,7 @@ _totalUsedTime	util/myUsage.h	/^   double     _totalUsedTime;$/;"	m	class:MyUsag
 add	task/taskMgr.cpp	/^TaskMgr::add(const string& s, size_t l)$/;"	f	class:TaskMgr
 add	task/taskMgr.cpp	/^TaskMgr::add(size_t nMachines)$/;"	f	class:TaskMgr
 assign	task/taskMgr.cpp	/^TaskMgr::assign(size_t l)$/;"	f	class:TaskMgr
-begin	util/myHashSet.h	/^   iterator begin() const { return iterator(); }$/;"	f	class:HashSet
+begin	util/myHashSet.cpp	/^HashSet<T>::begin() const $/;"	f	class:HashSet
 bucketNum	util/myHashSet.h	/^   size_t bucketNum(const Data& d) const {$/;"	f	class:HashSet
 check	util/myHashSet.cpp	/^HashSet<T>::check( const T& other ) const$/;"	f	class:HashSet
 checkMem	util/myUsage.h	/^   double checkMem() const {$/;"	f	class:MyUsage
@@ -62,7 +64,7 @@ delData	util/myMinHeap.h	/^   void delData(size_t i) { }$/;"	f	class:MinHeap
 delMin	util/myMinHeap.h	/^   void delMin() { }$/;"	f	class:MinHeap
 empty	task/taskMgr.h	/^   bool empty() { return size() == 0; }$/;"	f	class:TaskMgr
 empty	util/myHashSet.cpp	/^HashSet<T>::empty() const$/;"	f	class:HashSet
-end	util/myHashSet.h	/^   iterator end() const { return iterator(); }$/;"	f	class:HashSet
+end	util/myHashSet.cpp	/^HashSet<T>::end() const $/;"	f	class:HashSet
 exec	task/taskCmd.cpp	/^TaskAssignCmd::exec(const string& option)$/;"	f	class:TaskAssignCmd
 exec	task/taskCmd.cpp	/^TaskInitCmd::exec(const string& option)$/;"	f	class:TaskInitCmd
 exec	task/taskCmd.cpp	/^TaskNewCmd::exec(const string& option)$/;"	f	class:TaskNewCmd
@@ -81,6 +83,7 @@ initTaskCmd	task/taskCmd.cpp	/^initTaskCmd()$/;"	f
 insert	util/myHashSet.cpp	/^HashSet<T>::insert( const T& d )$/;"	f	class:HashSet
 insert	util/myMinHeap.h	/^   void insert(const Data& d) { }$/;"	f	class:MinHeap
 isValidVarName	util/myString.cpp	/^isValidVarName(const string& str)$/;"	f
+iterator	util/myHashSet.h	/^      iterator( const typename vector<Data>::iterator& it,$/;"	f	class:HashSet::iterator
 iterator	util/myHashSet.h	/^   class iterator$/;"	c	class:HashSet
 listDir	util/util.cpp	/^int listDir$/;"	f
 main	main/main.cpp	/^main(int argc, char** argv)$/;"	f

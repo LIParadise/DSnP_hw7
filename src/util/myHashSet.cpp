@@ -25,6 +25,8 @@ template < typename T>
 size_t
 HashSet<T>::size() const
 {
+  if( _buckets == nullptr )
+    return 0;
   size_t ret = 0;
   for( size_t i = 0; i < _numBuckets; ++i )
     ret += _buckets[i].size();
@@ -35,6 +37,8 @@ template < typename T>
 bool
 HashSet<T>::empty() const
 {
+  if( _buckets == nullptr )
+    return true;
   for( size_t i = 0; i < _numBuckets; ++i )
     if( !_buckets[i].empty() )
       return true;
@@ -45,6 +49,8 @@ template< typename T>
 bool
 HashSet<T>::check( const T& other ) const
 {
+  if( _buckets == nullptr )
+    return false;
   auto* bucketPtr = _buckets + bucketNum(other) ;
   return ( bucketPtr->find( other ) == bucketPtr -> end()  );
 }
@@ -53,6 +59,8 @@ template <typename T>
 bool
 HashSet<T>::query( T& other ) const
 {
+  if( _buckets == nullptr )
+    return false;
   auto* bucketPtr = _buckets + bucketNum(other) ;
   for_each ( bucketPtr->begin(), bucketPtr->end(),
             [&other] ( const T& data_stored_in_hash )
@@ -69,6 +77,8 @@ template <typename T>
 bool
 HashSet<T>::update( const T& other )
 {
+  if( _buckets == nullptr )
+    return false;
   auto* bucketPtr = _buckets + bucketNum(other) ;
   for_each ( bucketPtr->begin(), bucketPtr->end(),
             [&other] ( T& data_stored_in_hash )
@@ -86,6 +96,8 @@ template <typename T>
 bool
 HashSet<T>::remove( const T& other ) 
 {
+  if( _buckets == nullptr )
+    return false;
   auto* bucketPtr = _buckets + bucketNum(other) ;
   for( auto it = bucketPtr->begin(); it != bucketPtr->end(); ++it )
   {
@@ -97,3 +109,25 @@ HashSet<T>::remove( const T& other )
   }
   return false;
 }
+
+template <typename T>
+typename HashSet<T>::iterator
+HashSet<T>::begin() const 
+{
+  if( _buckets == nullptr )
+    return vector<T>().begin();
+  else
+    return _buckets[0].begin();
+}
+
+template <typename T>
+typename HashSet<T>::iterator
+HashSet<T>::end() const 
+{
+  if( _buckets == nullptr )
+    return vector<T>().end();
+  else
+    return iterator(_buckets[_numBuckets-1].end(), _numBuckets-1 );
+}
+
+
