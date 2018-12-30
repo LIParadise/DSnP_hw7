@@ -37,10 +37,6 @@ public:
 private:
    // DO NOT add or change data members
    vector<Data>   _data;
-
-   // utility functions
-   const Data& make_heap() ;
-   // would return minimum.
 };
 
 #endif // MY_MIN_HEAP_H

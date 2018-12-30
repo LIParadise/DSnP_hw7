@@ -61,6 +61,7 @@ public:
       iterator& operator -- () ;
       iterator  operator ++ (int) ;
       iterator  operator -- (int) ;
+      iterator& operator =  ( const iterator& i) ;
       bool operator != (const iterator& i) const ;
       bool operator == (const iterator& i) const ;
    private:
@@ -340,6 +341,19 @@ HashSet<T>::iterator::operator != ( const HashSet<T>::iterator&
                                    other_itor ) const
 {
   return ( ! ( operator == ( other_itor ) ) );
+}
+
+template <typename T>
+iterator&
+HashSet<T>::iterator::operator = ( const HashSet<T>::iterator&
+    other_itor )
+{
+  if( this != &other_itor )
+  {
+    _itor      = other_itor._itor;
+    _bucketIdx = other_itor._bucketIdx;
+    _caller    = other_itor._caller;
+  }
 }
 
 #endif // MY_HASH_SET_H
