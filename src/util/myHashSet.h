@@ -344,7 +344,7 @@ HashSet<T>::iterator::operator != ( const HashSet<T>::iterator&
 }
 
 template <typename T>
-iterator&
+typename HashSet<T>::iterator&
 HashSet<T>::iterator::operator = ( const HashSet<T>::iterator&
     other_itor )
 {

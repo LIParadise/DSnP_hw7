@@ -82,7 +82,7 @@ help	task/taskCmd.cpp	/^TaskRemoveCmd::help() const$/;"	f	class:TaskRemoveCmd
 init	util/myHashSet.h	/^   void init(size_t b) { _numBuckets = b; _buckets = new vector<Data>[b]; }$/;"	f	class:HashSet
 initTaskCmd	task/taskCmd.cpp	/^initTaskCmd()$/;"	f
 insert	util/myHashSet.h	/^HashSet<T>::insert( const T& d )$/;"	f	class:HashSet
-insert	util/myMinHeap.h	/^   void insert(const Data& d) { }$/;"	f	class:MinHeap
+insert	util/myMinHeap.h	/^MinHeap<T>::insert( const T& other )$/;"	f	class:MinHeap
 isValidVarName	util/myString.cpp	/^isValidVarName(const string& str)$/;"	f
 iterator	util/myHashSet.h	/^      iterator( const typename vector<Data>::iterator& it,$/;"	f	class:HashSet::iterator
 iterator	util/myHashSet.h	/^      iterator() :$/;"	f	class:HashSet::iterator
@@ -90,7 +90,7 @@ iterator	util/myHashSet.h	/^   class iterator$/;"	c	class:HashSet
 listDir	util/util.cpp	/^int listDir$/;"	f
 main	main/main.cpp	/^main(int argc, char** argv)$/;"	f
 min	task/taskMgr.h	/^   const TaskNode& min() const { return _taskHeap.min(); }$/;"	f	class:TaskMgr
-min	util/myMinHeap.h	/^   const Data& min() const { return Data(); }$/;"	f	class:MinHeap
+min	util/myMinHeap.h	/^MinHeap<T>::min() const$/;"	f	class:MinHeap
 myGetChar	util/myGetChar.cpp	/^char myGetChar()$/;"	f
 myGetChar	util/myGetChar.cpp	/^char myGetChar(istream& istr)$/;"	f
 myStr2Int	util/myString.cpp	/^myStr2Int(const string& str, int& num)$/;"	f
@@ -112,6 +112,7 @@ operator --	util/myHashSet.h	/^HashSet<T>::iterator::operator -- () \/\/ pre-dec
 operator --	util/myHashSet.h	/^HashSet<T>::iterator::operator -- (int dummy) $/;"	f	class:HashSet::iterator
 operator <	task/taskMgr.h	/^   bool operator < (const TaskNode& n) const { return _load < n._load; }$/;"	f	class:TaskNode
 operator <<	task/taskMgr.cpp	/^ostream& operator << (ostream& os, const TaskNode& n)$/;"	f
+operator =	util/myHashSet.h	/^HashSet<T>::iterator::operator = ( const HashSet<T>::iterator&$/;"	f	class:HashSet::iterator
 operator ==	task/taskMgr.h	/^   bool operator == (const TaskNode& n) const { return _name == n._name; }$/;"	f	class:TaskNode
 operator ==	util/myHashSet.h	/^HashSet<T>::iterator::operator == ( const HashSet<T>::iterator&$/;"	f	class:HashSet::iterator
 operator []	util/myHashSet.h	/^   const vector<Data>& operator [](size_t i) const { return _buckets[i]; }$/;"	f	class:HashSet
