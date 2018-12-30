@@ -34,14 +34,14 @@ TaskNode	task/taskMgr.h	/^class TaskNode$/;"	c
 TaskQueryCmd	task/taskCmd.h	/^CmdClass(TaskQueryCmd);$/;"	v
 TaskRemoveCmd	task/taskCmd.h	/^CmdClass(TaskRemoveCmd);$/;"	v
 UTIL_H	util/util.h	9;"	d
-_bucketIdx	util/myHashSet.h	/^      size_t                          _bucketIdx;$/;"	m	class:HashSet::iterator
+_bucketIdx	util/myHashSet.h	/^     size_t                          _bucketIdx;$/;"	m	class:HashSet::iterator
 _buckets	util/myHashSet.h	/^   vector<Data>*     _buckets;$/;"	m	class:HashSet
-_caller	util/myHashSet.h	/^      HashSet<Data>*                  _caller;$/;"	m	class:HashSet::iterator
+_caller	util/myHashSet.h	/^     HashSet<Data>*                  _caller;$/;"	m	class:HashSet::iterator
 _currentMem	util/myUsage.h	/^   double     _currentMem;$/;"	m	class:MyUsage
 _currentTick	util/myUsage.h	/^   double     _currentTick;$/;"	m	class:MyUsage
 _data	util/myMinHeap.h	/^   vector<Data>   _data;$/;"	m	class:MinHeap
 _initMem	util/myUsage.h	/^   double     _initMem;$/;"	m	class:MyUsage
-_itor	util/myHashSet.h	/^      typename vector<Data>::iterator _itor;$/;"	m	class:HashSet::iterator
+_itor	util/myHashSet.h	/^     typename vector<Data>::iterator _itor;$/;"	m	class:HashSet::iterator
 _load	task/taskMgr.h	/^   size_t   _load;$/;"	m	class:TaskNode
 _name	task/taskMgr.h	/^   string   _name;$/;"	m	class:TaskNode
 _numBuckets	util/myHashSet.h	/^   size_t            _numBuckets;$/;"	m	class:HashSet
@@ -85,8 +85,8 @@ initTaskCmd	task/taskCmd.cpp	/^initTaskCmd()$/;"	f
 insert	util/myHashSet.h	/^HashSet<T>::insert( const T& other )$/;"	f	class:HashSet
 insert	util/myMinHeap.h	/^MinHeap<T>::insert( const T& other )$/;"	f	class:MinHeap
 isValidVarName	util/myString.cpp	/^isValidVarName(const string& str)$/;"	f
-iterator	util/myHashSet.h	/^      iterator( const typename vector<Data>::iterator& it,$/;"	f	class:HashSet::iterator
-iterator	util/myHashSet.h	/^      iterator() :$/;"	f	class:HashSet::iterator
+iterator	util/myHashSet.h	/^     iterator( const typename vector<Data>::iterator& it,$/;"	f	class:HashSet::iterator
+iterator	util/myHashSet.h	/^     iterator() :$/;"	f	class:HashSet::iterator
 iterator	util/myHashSet.h	/^   class iterator$/;"	c	class:HashSet
 listDir	util/util.cpp	/^int listDir$/;"	f
 main	main/main.cpp	/^main(int argc, char** argv)$/;"	f

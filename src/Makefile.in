@@ -8,13 +8,13 @@ LIBDIR    = ../../lib
 EXTLINK   = $(PKGNAME).d
 LIBDEPEND = $(LIBDIR)/lib.d
 
-CXX       = g++
+CXX       = clang++
 CCC       = gcc
 AR        = ar cr
 ECHO      = /bin/echo
 
 CFLAGS = -O2 -Wall -std=c++11 -DTA_KB_SETTING $(PKGFLAG)
-# CFLAGS = -g -Wall -std=c++11 -DTA_KB_SETTING $(PKGFLAG)
+CFLAGS = -g -Wall -std=c++11 -DTA_KB_SETTING $(PKGFLAG)
 
 .PHONY: depend extheader
 

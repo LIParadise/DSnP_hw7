@@ -46,37 +46,37 @@ public:
    //
    class iterator
    {
-      friend class HashSet<Data>;
+     friend class HashSet<Data>;
 
-   public:
-      iterator( const typename vector<Data>::iterator& it,
-          size_t s = 0, HashSet<Data>* const ptr = nullptr):
-        _itor( it), _bucketIdx(s), _caller(ptr) {}
+     public:
+     iterator( const typename vector<Data>::iterator& it,
+              size_t s = 0, HashSet<Data>* const ptr = nullptr):
+       _itor( it), _bucketIdx(s), _caller(ptr) {}
 
-      iterator() :
-        _bucketIdx(0), _caller(nullptr) {}
+     iterator() :
+       _bucketIdx(0), _caller(nullptr){}
 
-      const Data& operator * () const ;
-      iterator& operator ++ () ;
-      iterator& operator -- () ;
-      iterator  operator ++ (int) ;
-      iterator  operator -- (int) ;
-      iterator& operator =  ( const iterator& i) ;
-      bool operator != (const iterator& i) const ;
-      bool operator == (const iterator& i) const ;
-   private:
-      typename vector<Data>::iterator _itor;
-      size_t                          _bucketIdx;
-      HashSet<Data>*                  _caller;
+     const Data& operator * () const ;
+     iterator& operator ++ () ;
+     iterator& operator -- () ;
+     iterator  operator ++ (int) ;
+     iterator  operator -- (int) ;
+     iterator& operator =  ( const iterator& i) ;
+     bool operator != (const iterator& i) const ;
+     bool operator == (const iterator& i) const ;
+     private:
+     typename vector<Data>::iterator _itor;
+     size_t                          _bucketIdx;
+     HashSet<Data>*                  _caller;
    };
 
    void init(size_t b) { _numBuckets = b; _buckets = new vector<Data>[b]; }
    void reset() {
-      _numBuckets = 0;
-      if (_buckets) { delete [] _buckets; _buckets = nullptr; }
+     _numBuckets = 0;
+     if (_buckets) { delete [] _buckets; _buckets = nullptr; }
    }
    void clear() {
-      for (size_t i = 0; i < _numBuckets; ++i) _buckets[i].clear();
+     for (size_t i = 0; i < _numBuckets; ++i) _buckets[i].clear();
    }
    size_t numBuckets() const { return _numBuckets; }
 
@@ -125,11 +125,11 @@ private:
    vector<Data>*     _buckets;
 
    size_t bucketNum(const Data& d) const {
-      return (d() % _numBuckets); }
+     return (d() % _numBuckets); }
 };
 
 template < typename T>
-bool
+  bool
 HashSet<T>::insert( const T& other )
 {
   // check if bucket valid first.
@@ -245,8 +245,19 @@ HashSet<T>::begin() const
   if( _buckets == nullptr )
     return vector<T>().begin();
   else
-    return iterator(_buckets[0].begin(), 0,
+  {
+    size_t i = 0;
+    for( ; i < _numBuckets; ++i )
+    {
+      if( !( _buckets[i].empty() ) )
+        break;
+    }
+    if( i == _numBuckets )
+      return end();
+    return iterator( _buckets[i].begin(),
+                    i,
                     const_cast<HashSet<T>*> (this) );
+  }
 }
 
 template <typename T>
@@ -265,7 +276,7 @@ template <typename T>
 const T&
 HashSet<T>::iterator::operator * () const 
 {
-  return (*_itor );
+  return (*_itor);
 }
 
 template <typename T>
