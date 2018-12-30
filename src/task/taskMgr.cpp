@@ -100,7 +100,13 @@ TaskMgr::add(size_t nMachines)
   bool
 TaskMgr::add(const string& s, size_t l)
 {
-  // TODO...
+  // TODO... done 1230 1630
+  TaskNode tmp(s,l);
+  if( _taskHash.insert( tmp ) )
+  {
+    _taskHeap.insert( tmp );
+    return true;
+  }
   return false;
 }
 
@@ -113,7 +119,16 @@ TaskMgr::add(const string& s, size_t l)
   bool
 TaskMgr::assign(size_t l)
 {
-  // TODO...
+  // TODO... done 1230 1640
+  if( empty() )
+    return false;
+
+  TaskNode tmp = _taskHeap.min();
+  tmp += l;
+  _taskHash.update( tmp );
+  _taskHeap.delMin();
+  _taskHeap.insert( tmp );
+
   return true;
 }
 

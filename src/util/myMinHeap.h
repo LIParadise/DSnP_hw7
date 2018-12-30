@@ -35,14 +35,8 @@ public:
    void delMin();
    void delData(size_t );
 
-private:
-   // DO NOT add or change data members
-   vector<Data>   _data;
-
-   // helper functions.
-
    // fix the heap. would call heapFixUp or heapFixDown;
-   void heapFix    ( size_t );
+   void heapFix    ( size_t idx = 0);
 
    // fixing ill-formed heap caused by deletion.
    // shall not be used to fix update of node.
@@ -50,6 +44,12 @@ private:
 
    // counterpart for heapFixDown
    void heapFixUp  ( size_t );
+
+private:
+   // DO NOT add or change data members
+   vector<Data>   _data;
+
+   // helper functions.
    
    // 0 begin root of the heap.
    // (2*n)+1 --> left child.
@@ -86,7 +86,7 @@ void
 MinHeap<T>::delMin()
 {
   swap( _data[0], _data[_data.size()-1] );
-  _data.erase(_data.back());
+  _data.pop_back();
   heapFix();
 }
 
