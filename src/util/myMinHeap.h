@@ -35,15 +35,9 @@ public:
    void delMin();
    void delData(size_t );
 
-   // fix the heap. would call heapFixUp or heapFixDown;
-   void heapFix    ( size_t idx = 0);
-
    // fixing ill-formed heap caused by deletion.
    // shall not be used to fix update of node.
-   void heapFixDown( size_t );
-
-   // counterpart for heapFixDown
-   void heapFixUp  ( size_t );
+   void heapFixDown( size_t idx = 0);
 
 private:
    // DO NOT add or change data members
@@ -73,7 +67,7 @@ MinHeap<T>::insert( const T& other )
   while( s != 0 )
   {
     parent = (s-1)/2;
-    if( _data[parent] < other )
+    if( !(other < _data[parent] ) )
       break;
     _data[s] = _data[parent] ;
     s = parent;
@@ -87,7 +81,7 @@ MinHeap<T>::delMin()
 {
   swap( _data[0], _data[_data.size()-1] );
   _data.pop_back();
-  heapFix();
+  heapFixDown();
 }
 
 template <typename T>
@@ -96,7 +90,7 @@ MinHeap<T>::delData( size_t s )
 {
   swap( _data[s], _data[_data.size()-1] );
   _data.pop_back();
-  heapFix( s );
+  heapFixDown( s );
 }
 
 template <typename T>
@@ -127,44 +121,4 @@ MinHeap<T>::heapFixDown( size_t idx)
   }
 }
 
-template <typename T>
-void
-MinHeap<T>::heapFixUp( size_t idx )
-{
-  // just fix upwards.
-  // other part of the heap is still in valid state,
-  // thus just compare it to its parent.
-  if( idx == 0 )
-    return;
-
-  while( idx != 0 )
-  {
-    size_t parent = (idx-1)/2;
-    if( _data[idx] < _data[parent] )
-    {
-      swap( _data[idx], _data[parent] );
-      idx = parent;
-    }
-  }
-}
-
-template <typename T>
-void
-MinHeap<T>::heapFix( size_t idx )
-{
-
-  if( idx >= _data.size() )
-    return;
-
-  size_t parent = (idx-1)/2;
-
-  if( idx != 0 )
-    if( _data[idx] < _data[parent] )
-    {
-      heapFixUp( idx );
-      return;
-    }
-  heapFixDown( idx );
-  return ;
-}
 #endif // MY_MIN_HEAP_H

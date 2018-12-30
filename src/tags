@@ -74,9 +74,7 @@ exec	task/taskCmd.cpp	/^TaskRemoveCmd::exec(const string& option)$/;"	f	class:Ta
 getHashSize	util/util.cpp	/^size_t getHashSize(size_t s) {$/;"	f
 getLoad	task/taskMgr.h	/^   size_t getLoad() const { return _load; }$/;"	f	class:TaskNode
 getName	task/taskMgr.h	/^   const string& getName() const { return _name; }$/;"	f	class:TaskNode
-heapFix	util/myMinHeap.h	/^MinHeap<T>::heapFix( size_t idx )$/;"	f	class:MinHeap
 heapFixDown	util/myMinHeap.h	/^MinHeap<T>::heapFixDown( size_t idx)$/;"	f	class:MinHeap
-heapFixUp	util/myMinHeap.h	/^MinHeap<T>::heapFixUp( size_t idx )$/;"	f	class:MinHeap
 help	task/taskCmd.cpp	/^TaskAssignCmd::help() const$/;"	f	class:TaskAssignCmd
 help	task/taskCmd.cpp	/^TaskInitCmd::help() const$/;"	f	class:TaskInitCmd
 help	task/taskCmd.cpp	/^TaskNewCmd::help() const$/;"	f	class:TaskNewCmd
