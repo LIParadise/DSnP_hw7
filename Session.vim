@@ -296,12 +296,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 88 - ((18 * winheight(0) + 19) / 39)
+let s:l = 88 - ((31 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 88
-normal! 019|
+normal! 024|
 wincmd w
 exe 'vert 1resize ' . ((&columns * 73 + 73) / 146)
 exe 'vert 2resize ' . ((&columns * 72 + 73) / 146)
@@ -337,7 +337,7 @@ setlocal buflisted
 setlocal buftype=
 setlocal cindent
 setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
-setlocal cinoptions=
+setlocal cinoptions=j1,(0,ws,Ws,N-s
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
 setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
@@ -436,11 +436,11 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 37 - ((16 * winheight(0) + 9) / 19)
+let s:l = 39 - ((17 * winheight(0) + 9) / 19)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-37
+39
 normal! 0
 wincmd w
 argglobal
@@ -713,7 +713,7 @@ setlocal buflisted
 setlocal buftype=
 setlocal cindent
 setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
-setlocal cinoptions=
+setlocal cinoptions=j1,(0,ws,Ws,N-s
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
 setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
@@ -812,12 +812,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 84 - ((22 * winheight(0) + 19) / 39)
+let s:l = 182 - ((20 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-84
-normal! 015|
+182
+normal! 028|
 wincmd w
 argglobal
 edit src/util/myHashSet.h
@@ -833,7 +833,7 @@ setlocal buflisted
 setlocal buftype=
 setlocal cindent
 setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
-setlocal cinoptions=
+setlocal cinoptions=j1,(0,ws,Ws,N-s
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
 setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
@@ -932,14 +932,13 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 342 - ((26 * winheight(0) + 19) / 39)
+let s:l = 95 - ((0 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-342
-normal! 0
+95
+normal! 09|
 wincmd w
-2wincmd w
 exe 'vert 1resize ' . ((&columns * 73 + 73) / 146)
 exe 'vert 2resize ' . ((&columns * 72 + 73) / 146)
 tabedit ./src/task/taskCmd.cpp

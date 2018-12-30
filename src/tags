@@ -84,7 +84,7 @@ help	task/taskCmd.cpp	/^TaskQueryCmd::help() const$/;"	f	class:TaskQueryCmd
 help	task/taskCmd.cpp	/^TaskRemoveCmd::help() const$/;"	f	class:TaskRemoveCmd
 init	util/myHashSet.h	/^   void init(size_t b) { _numBuckets = b; _buckets = new vector<Data>[b]; }$/;"	f	class:HashSet
 initTaskCmd	task/taskCmd.cpp	/^initTaskCmd()$/;"	f
-insert	util/myHashSet.h	/^HashSet<T>::insert( const T& d )$/;"	f	class:HashSet
+insert	util/myHashSet.h	/^HashSet<T>::insert( const T& other )$/;"	f	class:HashSet
 insert	util/myMinHeap.h	/^MinHeap<T>::insert( const T& other )$/;"	f	class:MinHeap
 isValidVarName	util/myString.cpp	/^isValidVarName(const string& str)$/;"	f
 iterator	util/myHashSet.h	/^      iterator( const typename vector<Data>::iterator& it,$/;"	f	class:HashSet::iterator

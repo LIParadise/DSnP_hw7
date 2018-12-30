@@ -130,21 +130,21 @@ private:
 
 template < typename T>
 bool
-HashSet<T>::insert( const T& d )
+HashSet<T>::insert( const T& other )
 {
   // check if bucket valid first.
   if( _buckets == nullptr )
     _buckets = new vector<T> [ _numBuckets] ;
 
   // check if exactly the same element.
-  auto* bucketPtr = _buckets + bucketNum(d);
-
-  if( find( bucketPtr->begin(), bucketPtr->end(), d ) !=
-      bucketPtr->end() ){
+  auto* bucketPtr = _buckets + bucketNum(other);
+  auto  itor = find( bucketPtr->begin(), bucketPtr->end(), other );
+  if( itor != bucketPtr -> end () )
+  {
     return false;
   }
 
-  bucketPtr->push_back( d);
+  bucketPtr->push_back( other);
   return true;
 }
 
@@ -188,12 +188,10 @@ HashSet<T>::query( T& other ) const
 {
   if( _buckets == nullptr )
     return false;
+
   auto* bucketPtr = _buckets + bucketNum(other) ;
-  auto  itor = find_if( bucketPtr->begin(), bucketPtr->end(),
-                       [&other] ( const T& stored_data ) -> bool
-                       {
-                         return (other == stored_data);
-                       } );
+  auto  itor = find( bucketPtr->begin(), bucketPtr->end(), other );
+
   if( itor != bucketPtr -> end() )
   {
     other = (*itor);
@@ -210,13 +208,11 @@ HashSet<T>::update( const T& other )
     return false;
 
   auto* bucketPtr = _buckets + bucketNum(other) ;
-  for( auto it = bucketPtr->begin(); it != bucketPtr->end(); ++it )
+  auto  itor = find( bucketPtr->begin(), bucketPtr->end(), other );
+  if( itor != bucketPtr -> end() )
   {
-    if( *it == other )
-    {
-      *it = other;
-      return true;
-    }
+    (*itor) = other;
+    return true;
   }
   bucketPtr->push_back( other);
   return false;
