@@ -152,6 +152,10 @@ template <typename T>
 void
 MinHeap<T>::heapFix( size_t idx )
 {
+
+  if( idx >= _data.size() )
+    return;
+
   size_t parent = (idx-1)/2;
 
   if( idx != 0 )

@@ -229,8 +229,9 @@ HashSet<T>::remove( const T& other )
   {
     if( *it == other )
     {
-      swap( (*it), (*(bucketPtr->end() -1) ) );
-      bucketPtr -> pop_back();
+      // swap( (*it), (*(bucketPtr->end() -1) ) );
+      // bucketPtr -> pop_back();
+      bucketPtr->erase(it);
       return true;
     }
   }

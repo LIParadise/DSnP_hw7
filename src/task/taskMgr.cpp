@@ -91,6 +91,8 @@ TaskMgr::add(size_t nMachines)
     if( _taskHash.insert( tmp ) ){
       _taskHeap.insert( tmp) ;
       ++i;
+      cout << "Task node inserted: (" << tmp.getName() << ", "
+        << tmp.getLoad() << ')' << endl;
     }
   }
 }
@@ -105,6 +107,8 @@ TaskMgr::add(const string& s, size_t l)
   if( _taskHash.insert( tmp ) )
   {
     _taskHeap.insert( tmp );
+    cout << "Task node inserted: (" << tmp.getName() << ", "
+      << tmp.getLoad() << ')' << endl;
     return true;
   }
   return false;
