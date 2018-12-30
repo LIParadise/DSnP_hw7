@@ -189,38 +189,41 @@ HashSet<T>::query( T& other ) const
   if( _buckets == nullptr )
     return false;
   auto* bucketPtr = _buckets + bucketNum(other) ;
-  for_each ( bucketPtr->begin(), bucketPtr->end(),
-            [&other] ( const T& data_stored_in_hash )
-            {
-              if( data_stored_in_hash == other ){
-                other = data_stored_in_hash;
-                return true;
-              }
-            } );
+  auto  itor = find_if( bucketPtr->begin(), bucketPtr->end(),
+                       [&other] ( const T& stored_data ) -> bool
+                       {
+                         return (other == stored_data);
+                       } );
+  if( itor != bucketPtr -> end() )
+  {
+    other = (*itor);
+    return true;
+  }
   return false;
 }
 
 template <typename T>
-bool
+  bool
 HashSet<T>::update( const T& other )
 {
   if( _buckets == nullptr )
     return false;
+
   auto* bucketPtr = _buckets + bucketNum(other) ;
-  for_each ( bucketPtr->begin(), bucketPtr->end(),
-            [&other] ( T& data_stored_in_hash )
-            {
-              if( data_stored_in_hash == other ){
-                data_stored_in_hash = other;
-                return true;
-              }
-            } );
+  for( auto it = bucketPtr->begin(); it != bucketPtr->end(); ++it )
+  {
+    if( *it == other )
+    {
+      *it = other;
+      return true;
+    }
+  }
   bucketPtr->push_back( other);
   return false;
 }
 
 template <typename T>
-bool
+  bool
 HashSet<T>::remove( const T& other ) 
 {
   if( _buckets == nullptr )
@@ -230,7 +233,8 @@ HashSet<T>::remove( const T& other )
   {
     if( *it == other )
     {
-      bucketPtr->erase( it );
+      swap( (*it), (*(bucketPtr->end() -1) ) );
+      bucketPtr -> pop_back();
       return true;
     }
   }
@@ -245,7 +249,7 @@ HashSet<T>::begin() const
     return vector<T>().begin();
   else
     return iterator(_buckets[0].begin(), 0,
-        const_cast<HashSet<T>*> (this) );
+                    const_cast<HashSet<T>*> (this) );
 }
 
 template <typename T>
@@ -268,7 +272,7 @@ HashSet<T>::iterator::operator * () const
 }
 
 template <typename T>
-typename HashSet<T>::iterator&
+  typename HashSet<T>::iterator&
 HashSet<T>::iterator::operator ++ () // pre-increment operator
 {
   if( _caller == nullptr )
@@ -285,9 +289,9 @@ HashSet<T>::iterator::operator ++ () // pre-increment operator
 }
 
 template <typename T>
-typename HashSet<T>::iterator
+  typename HashSet<T>::iterator
 HashSet<T>::iterator::operator ++ (int dummy) 
-// post-increment operator
+  // post-increment operator
 {
   if( _caller == nullptr )
     return (*this);
@@ -298,7 +302,7 @@ HashSet<T>::iterator::operator ++ (int dummy)
 }
 
 template <typename T>
-typename HashSet<T>::iterator&
+  typename HashSet<T>::iterator&
 HashSet<T>::iterator::operator -- () // pre-decrement operator
 {
   if( _caller == nullptr )
@@ -315,7 +319,7 @@ HashSet<T>::iterator::operator -- () // pre-decrement operator
 }
 
 template <typename T>
-typename HashSet<T>::iterator
+  typename HashSet<T>::iterator
 HashSet<T>::iterator::operator -- (int dummy) 
   // post-decrement operator
 {
@@ -346,7 +350,7 @@ HashSet<T>::iterator::operator != ( const HashSet<T>::iterator&
 template <typename T>
 typename HashSet<T>::iterator&
 HashSet<T>::iterator::operator = ( const HashSet<T>::iterator&
-    other_itor )
+                                  other_itor )
 {
   if( this != &other_itor )
   {
