@@ -332,7 +332,7 @@ bool
 HashSet<T>::iterator::operator == ( const HashSet<T>::iterator&
                                    other_itor ) const
 {
-  return ( (*_itor) == (*other_itor._itor) );
+  return ( (_itor) == (other_itor._itor) );
 }
 
 template <typename T>
