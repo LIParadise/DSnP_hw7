@@ -40,7 +40,13 @@ private:
    vector<Data>   _data;
 
    // helper functions.
-   void heapFix( size_t );
+
+   // fixing ill-formed heap caused by deletion.
+   // shall not be used to fix update of node.
+   void heapFixDown( size_t );
+
+   // counterpart for heapFixDown
+   void heapFixUp  ( size_t );
    
    // 0 begin root of the heap.
    // (2*n)+1 --> left child.
@@ -78,7 +84,7 @@ MinHeap<T>::delMin()
 {
   swap( _data[0], _data[_data.size()-1] );
   _data.erase(_data.back());
-  heapFix();
+  heapFixDown();
 }
 
 template <typename T>
@@ -87,12 +93,12 @@ MinHeap<T>::delData( size_t s )
 {
   swap( _data[s], _data[_data.size()-1] );
   _data.pop_back();
-  heapFix( s );
+  heapFixDown( s );
 }
 
 template <typename T>
 void
-MinHeap<T>::heapFix( size_t idx)
+MinHeap<T>::heapFixDown( size_t idx)
 {
   // idx marks the position which may not obbey heap rule.
   //
@@ -100,8 +106,7 @@ MinHeap<T>::heapFix( size_t idx)
   // than it's parent; i.e. it's parent is smaller than all its
   // descendants.
   // 
-  // just compare to idx to child of idx, find if idx is 
-  // actually invalid.
+  // just fix downwards.
   if( !( idx<_data.size()) )
     return;
 
@@ -119,9 +124,32 @@ MinHeap<T>::heapFix( size_t idx)
         tmp = childR;
     if( tmp == idx )
       break;
-    _data[ idx ] = move( _data[ tmp ] );
+    _data[ idx ] = _data[ tmp ] ;
     idx = tmp;
   }
   _data[idx] = move( bak );
+}
+
+template <typename T>
+void
+MinHeap<T>::heapFixUp( size_t idx )
+{
+  // just fix upwards.
+  // other part of the heap is still in valid state,
+  // thus just compare it to its parent.
+  if( idx == 0 )
+    return;
+
+  T bak = _data[idx];
+  while( idx != 0 )
+  {
+    size_t parent = (idx-1)/2;
+    if( bak < _data[parent] )
+    {
+      _data[idx] = _data[parent];
+      idx = parent;
+    }
+  }
+  _data[idx] = move( bak);
 }
 #endif // MY_MIN_HEAP_H
