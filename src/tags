@@ -61,8 +61,8 @@ clear	task/taskMgr.cpp	/^TaskMgr::clear()$/;"	f	class:TaskMgr
 clear	util/myHashSet.h	/^   void clear() {$/;"	f	class:HashSet
 clear	util/myMinHeap.h	/^   void clear() { _data.clear(); }$/;"	f	class:MinHeap
 clearList	util/util.h	/^void clearList(T& l)$/;"	f
-delData	util/myMinHeap.h	/^   void delData(size_t i) { }$/;"	f	class:MinHeap
-delMin	util/myMinHeap.h	/^   void delMin() { }$/;"	f	class:MinHeap
+delData	util/myMinHeap.h	/^MinHeap<T>::delData( size_t s )$/;"	f	class:MinHeap
+delMin	util/myMinHeap.h	/^MinHeap<T>::delMin()$/;"	f	class:MinHeap
 empty	task/taskMgr.h	/^   bool empty() { return size() == 0; }$/;"	f	class:TaskMgr
 empty	util/myHashSet.h	/^HashSet<T>::empty() const$/;"	f	class:HashSet
 end	util/myHashSet.h	/^HashSet<T>::end() const $/;"	f	class:HashSet
@@ -74,6 +74,7 @@ exec	task/taskCmd.cpp	/^TaskRemoveCmd::exec(const string& option)$/;"	f	class:Ta
 getHashSize	util/util.cpp	/^size_t getHashSize(size_t s) {$/;"	f
 getLoad	task/taskMgr.h	/^   size_t getLoad() const { return _load; }$/;"	f	class:TaskNode
 getName	task/taskMgr.h	/^   const string& getName() const { return _name; }$/;"	f	class:TaskNode
+heapFix	util/myMinHeap.h	/^MinHeap<T>::heapFix( size_t idx)$/;"	f	class:MinHeap
 help	task/taskCmd.cpp	/^TaskAssignCmd::help() const$/;"	f	class:TaskAssignCmd
 help	task/taskCmd.cpp	/^TaskInitCmd::help() const$/;"	f	class:TaskInitCmd
 help	task/taskCmd.cpp	/^TaskNewCmd::help() const$/;"	f	class:TaskNewCmd
