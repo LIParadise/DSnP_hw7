@@ -10,6 +10,7 @@
 #define MY_HASH_SET_H
 
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -49,14 +50,23 @@ public:
 
    public:
       iterator( const typename vector<Data>::iterator& it,
-          size_t s = 0):
-        _itor( it), _bucketIdx(s) {}
-      const Data& operator * () const { return Data(); }
-      iterator& operator ++ () { return (*this); }
-      bool operator != (const iterator& i) const { return true; }
+          size_t s = 0, HashSet<Data>* const ptr = nullptr):
+        _itor( it), _bucketIdx(s), _caller(ptr) {}
+
+      iterator() :
+        _bucketIdx(0), _caller(nullptr) {}
+
+      const Data& operator * () const ;
+      iterator& operator ++ () ;
+      iterator& operator -- () ;
+      iterator  operator ++ (int) ;
+      iterator  operator -- (int) ;
+      bool operator != (const iterator& i) const ;
+      bool operator == (const iterator& i) const ;
    private:
       typename vector<Data>::iterator _itor;
       size_t                          _bucketIdx;
+      HashSet<Data>*                  _caller;
    };
 
    void init(size_t b) { _numBuckets = b; _buckets = new vector<Data>[b]; }
@@ -116,5 +126,220 @@ private:
    size_t bucketNum(const Data& d) const {
       return (d() % _numBuckets); }
 };
+
+template < typename T>
+bool
+HashSet<T>::insert( const T& d )
+{
+  // check if bucket valid first.
+  if( _buckets == nullptr )
+    _buckets = new vector<T> [ _numBuckets] ;
+
+  // check if exactly the same element.
+  auto* bucketPtr = _buckets + bucketNum(d);
+
+  if( find( bucketPtr->begin(), bucketPtr->end(), d ) !=
+      bucketPtr->end() ){
+    return false;
+  }
+
+  bucketPtr->push_back( d);
+  return true;
+}
+
+template < typename T>
+size_t
+HashSet<T>::size() const
+{
+  if( _buckets == nullptr )
+    return 0;
+  size_t ret = 0;
+  for( size_t i = 0; i < _numBuckets; ++i )
+    ret += _buckets[i].size();
+  return ret;
+}
+
+template < typename T>
+bool
+HashSet<T>::empty() const
+{
+  if( _buckets == nullptr )
+    return true;
+  for( size_t i = 0; i < _numBuckets; ++i )
+    if( !_buckets[i].empty() )
+      return true;
+  return false;
+}
+
+template< typename T>
+bool
+HashSet<T>::check( const T& other ) const
+{
+  if( _buckets == nullptr )
+    return false;
+  auto* bucketPtr = _buckets + bucketNum(other) ;
+  return ( bucketPtr->find( other ) == bucketPtr -> end()  );
+}
+
+template <typename T>
+bool
+HashSet<T>::query( T& other ) const
+{
+  if( _buckets == nullptr )
+    return false;
+  auto* bucketPtr = _buckets + bucketNum(other) ;
+  for_each ( bucketPtr->begin(), bucketPtr->end(),
+            [&other] ( const T& data_stored_in_hash )
+            {
+              if( data_stored_in_hash == other ){
+                other = data_stored_in_hash;
+                return true;
+              }
+            } );
+  return false;
+}
+
+template <typename T>
+bool
+HashSet<T>::update( const T& other )
+{
+  if( _buckets == nullptr )
+    return false;
+  auto* bucketPtr = _buckets + bucketNum(other) ;
+  for_each ( bucketPtr->begin(), bucketPtr->end(),
+            [&other] ( T& data_stored_in_hash )
+            {
+              if( data_stored_in_hash == other ){
+                data_stored_in_hash = other;
+                return true;
+              }
+            } );
+  bucketPtr->push_back( other);
+  return false;
+}
+
+template <typename T>
+bool
+HashSet<T>::remove( const T& other ) 
+{
+  if( _buckets == nullptr )
+    return false;
+  auto* bucketPtr = _buckets + bucketNum(other) ;
+  for( auto it = bucketPtr->begin(); it != bucketPtr->end(); ++it )
+  {
+    if( *it == other )
+    {
+      bucketPtr->erase( it );
+      return true;
+    }
+  }
+  return false;
+}
+
+template <typename T>
+typename HashSet<T>::iterator
+HashSet<T>::begin() const 
+{
+  if( _buckets == nullptr )
+    return vector<T>().begin();
+  else
+    return iterator(_buckets[0].begin(), 0,
+        const_cast<HashSet<T>*> (this) );
+}
+
+template <typename T>
+typename HashSet<T>::iterator
+HashSet<T>::end() const 
+{
+  if( _buckets == nullptr )
+    return vector<T>().end();
+  else
+    return iterator(_buckets[_numBuckets-1].end(),
+                    _numBuckets-1,
+                    const_cast<HashSet<T>*> (this) );
+}
+
+template <typename T>
+const T&
+HashSet<T>::iterator::operator * () const 
+{
+  return (*_itor );
+}
+
+template <typename T>
+typename HashSet<T>::iterator&
+HashSet<T>::iterator::operator ++ () // pre-increment operator
+{
+  if( _caller == nullptr )
+    return (*this);
+
+  _itor++;
+  while( _itor == (*_caller)[_bucketIdx].end()
+        && _bucketIdx < _caller->numBuckets()-1 )
+  {
+    ++ _bucketIdx;
+    _itor = (*_caller)[_bucketIdx].begin() ;
+  }
+  return (*this);
+}
+
+template <typename T>
+typename HashSet<T>::iterator
+HashSet<T>::iterator::operator ++ (int dummy) 
+// post-increment operator
+{
+  if( _caller == nullptr )
+    return (*this);
+
+  auto tmp = (*this);
+  operator ++ ();
+  return tmp;
+}
+
+template <typename T>
+typename HashSet<T>::iterator&
+HashSet<T>::iterator::operator -- () // pre-decrement operator
+{
+  if( _caller == nullptr )
+    return (*this);
+
+  while( _itor == (*_caller)[_bucketIdx].begin() 
+        && _bucketIdx > 0)
+  {
+    _bucketIdx --;
+    _itor = (*_caller ) [_bucketIdx].end();
+  }
+  _itor--;
+  return (*this);
+}
+
+template <typename T>
+typename HashSet<T>::iterator
+HashSet<T>::iterator::operator -- (int dummy) 
+  // post-decrement operator
+{
+  if( _caller == nullptr )
+    return (*this);
+
+  auto tmp = (*this);
+  operator -- ();
+  return tmp;
+}
+
+template <typename T>
+bool
+HashSet<T>::iterator::operator == ( const HashSet<T>::iterator&
+                                   other_itor ) const
+{
+  return ( (*_itor) == (*other_itor._itor) );
+}
+
+template <typename T>
+bool
+HashSet<T>::iterator::operator != ( const HashSet<T>::iterator&
+                                   other_itor ) const
+{
+  return ( ! ( operator == ( other_itor ) ) );
+}
 
 #endif // MY_HASH_SET_H
