@@ -130,4 +130,3 @@ HashSet<T>::end() const
     return iterator(_buckets[_numBuckets-1].end(), _numBuckets-1 );
 }
 
-
